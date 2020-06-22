@@ -1,3 +1,9 @@
 package omikhieiev.app.data.netowrking.data
 
-data class LoginData (val email: String, val password: String) {}
+import com.google.gson.annotations.SerializedName
+
+data class LoginData (
+    @SerializedName("email")
+    val email: String,
+    @SerializedName("password")
+    val password: String) {}

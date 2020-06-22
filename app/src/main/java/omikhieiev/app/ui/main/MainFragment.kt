@@ -50,7 +50,7 @@ class MainFragment : Fragment() {
 
         viewModel.generalInfo.observe(this.viewLifecycleOwner, Observer {
             view.totalSum.text = it.sum.toString()
-            view.averageSum.text = it.average.toString()
+            view.averageSum.text = "~${it.average}"
         })
     }
 }

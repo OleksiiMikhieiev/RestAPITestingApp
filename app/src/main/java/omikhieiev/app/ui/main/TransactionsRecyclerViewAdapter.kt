@@ -1,11 +1,9 @@
 package omikhieiev.app.ui.main
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import omikhieiev.app.R
 import omikhieiev.app.domain.data.Transaction

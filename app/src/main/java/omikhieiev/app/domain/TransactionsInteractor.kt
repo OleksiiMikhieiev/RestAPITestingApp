@@ -4,7 +4,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import omikhieiev.app.domain.boundaries.app.TransactionsUseCase
 import omikhieiev.app.domain.boundaries.data.TransactionsDataSource
-import omikhieiev.app.domain.data.AuthData
 import omikhieiev.app.domain.data.AuthDataHolder
 import omikhieiev.app.domain.data.Transaction
 
@@ -17,13 +16,13 @@ class TransactionsInteractor(private val transactionsDataSource: TransactionsDat
     override suspend fun calculateAverage(transactions: List<Transaction>): Double =
         withContext(Dispatchers.Default) {
             val sum = calculateSum(transactions)
-            sum.toDouble() / transactions.size
+            sum / transactions.size
         }
 
 
-    override suspend fun calculateSum(transactions: List<Transaction>): Int =
+    override suspend fun calculateSum(transactions: List<Transaction>): Double =
         withContext(Dispatchers.Default) {
-            var sum = 0
+            var sum = 0.0
             transactions.forEach {
                 sum += it.sourceAmount
             }

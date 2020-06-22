@@ -6,6 +6,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import omikhieiev.app.data.LoginRepository
 import omikhieiev.app.data.TransactionsRepository
+import omikhieiev.app.data.netowrking.RestService
 import omikhieiev.app.domain.boundaries.data.LoginDataSource
 import omikhieiev.app.domain.boundaries.data.TransactionsDataSource
 
@@ -14,9 +15,9 @@ import omikhieiev.app.domain.boundaries.data.TransactionsDataSource
 object DataModule {
 
     @Provides
-    fun provideLoginDataSource(): LoginDataSource = LoginRepository()
+    fun provideLoginDataSource(restService: RestService): LoginDataSource = LoginRepository(restService)
 
     @Provides
-    fun provideTransactionsDataSource(): TransactionsDataSource = TransactionsRepository()
+    fun provideTransactionsDataSource(restService: RestService): TransactionsDataSource = TransactionsRepository(restService)
 
 }
