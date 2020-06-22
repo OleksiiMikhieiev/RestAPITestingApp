@@ -10,14 +10,20 @@ import omikhieiev.app.domain.boundaries.app.LoginUseCase
 import omikhieiev.app.domain.boundaries.app.TransactionsUseCase
 import omikhieiev.app.domain.boundaries.data.LoginDataSource
 import omikhieiev.app.domain.boundaries.data.TransactionsDataSource
+import omikhieiev.app.domain.data.AuthDataHolder
+import javax.inject.Singleton
 
 @Module
 @InstallIn(ApplicationComponent::class)
 object DomainModule {
 
     @Provides
-    fun provideTransactionsUseCase(dataSource: TransactionsDataSource): TransactionsUseCase = TransactionsInteractor(dataSource)
+    fun provideTransactionsUseCase(dataSource: TransactionsDataSource, authDataHolder: AuthDataHolder): TransactionsUseCase = TransactionsInteractor(dataSource, authDataHolder)
 
     @Provides
-    fun provideLoginUseCase(dataSource: LoginDataSource): LoginUseCase = LoginInteractor(dataSource)
+    fun provideLoginUseCase(dataSource: LoginDataSource, authDataHolder: AuthDataHolder): LoginUseCase = LoginInteractor(dataSource, authDataHolder)
+
+    @Provides
+    @Singleton
+    fun provideAuthDataHolder(): AuthDataHolder = AuthDataHolder()
 }

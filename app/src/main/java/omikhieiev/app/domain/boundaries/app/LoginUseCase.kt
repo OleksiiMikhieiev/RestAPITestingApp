@@ -4,6 +4,6 @@ import omikhieiev.app.domain.Result
 
 interface LoginUseCase {
 
-    suspend fun login(email: String, password: String): Result<Nothing>
+    suspend fun login(email: String, password: String): Result<Boolean>
 
 }

@@ -15,14 +15,30 @@ class MainScreenViewModel @ViewModelInject constructor(private val transactionsU
     private val _getTransactionsResult: MutableLiveData<List<Transaction>> = MutableLiveData()
     val transactions: LiveData<List<Transaction>> = _getTransactionsResult
 
+    private val _loadingError: MutableLiveData<String> = MutableLiveData()
+    val loadingError: LiveData<String> = _loadingError
+
+    private val _generalInfo: MutableLiveData<GeneralInfo> = MutableLiveData()
+    val generalInfo: LiveData<GeneralInfo> = _generalInfo
+
+    init {
+        // Prepopulate data to the view
+        getAllTransactions()
+    }
+
     fun getAllTransactions() {
         viewModelScope.launch {
             val result = transactionsUseCase.getAllTransactions()
             when (result) {
-                is Result.Success -> _getTransactionsResult.postValue(result.data)
+                is Result.Success -> {
+                    _getTransactionsResult.postValue(result.data)
+                    val sum = transactionsUseCase.calculateSum(result.data)
+                    val avg = transactionsUseCase.calculateAverage(result.data)
+                    _generalInfo.postValue(GeneralInfo(sum, avg))
+                }
+                is Result.Error -> _loadingError.postValue(result.message)
             }
         }
     }
-
 
 }

@@ -1,4 +1,4 @@
 package omikhieiev.app.domain.data
 
-data class Transaction (val reference: String, val sourceAmount: Int) {
+data class Transaction (val reference: String, val sourceAmount: Int, val status: String) {
 }

@@ -1,28 +1,33 @@
 package omikhieiev.app.domain
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import omikhieiev.app.domain.boundaries.app.TransactionsUseCase
 import omikhieiev.app.domain.boundaries.data.TransactionsDataSource
+import omikhieiev.app.domain.data.AuthData
+import omikhieiev.app.domain.data.AuthDataHolder
 import omikhieiev.app.domain.data.Transaction
 
-class TransactionsInteractor(private val transactionsDataSource: TransactionsDataSource): TransactionsUseCase {
+class TransactionsInteractor(private val transactionsDataSource: TransactionsDataSource, private val authDataHolder: AuthDataHolder): TransactionsUseCase {
 
     override suspend fun getAllTransactions(): Result<List<Transaction>> {
-        TODO("Not yet implemented")
+        return transactionsDataSource.getAllTransactions(authDataHolder.authData)
     }
 
-    override suspend fun calculateAverage(transactions: List<Transaction>): Double {
-        val sum = calculateSum(transactions)
-
-        return sum.toDouble() / transactions.size
-    }
-
-    override suspend fun calculateSum(transactions: List<Transaction>): Int {
-        var sum = 0
-
-        transactions.forEach {
-            sum += it.sourceAmount
+    override suspend fun calculateAverage(transactions: List<Transaction>): Double =
+        withContext(Dispatchers.Default) {
+            val sum = calculateSum(transactions)
+            sum.toDouble() / transactions.size
         }
 
-        return sum
-    }
+
+    override suspend fun calculateSum(transactions: List<Transaction>): Int =
+        withContext(Dispatchers.Default) {
+            var sum = 0
+            transactions.forEach {
+                sum += it.sourceAmount
+            }
+
+            sum
+        }
 }
