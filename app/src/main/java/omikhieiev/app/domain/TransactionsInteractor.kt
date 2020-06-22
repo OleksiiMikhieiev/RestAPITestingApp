@@ -13,20 +13,17 @@ class TransactionsInteractor(private val transactionsDataSource: TransactionsDat
         return transactionsDataSource.getAllTransactions(authDataHolder.authData)
     }
 
-    override suspend fun calculateAverage(transactions: List<Transaction>): Double =
-        withContext(Dispatchers.Default) {
-            val sum = calculateSum(transactions)
-            sum / transactions.size
+    override fun calculateAverage(transactions: List<Transaction>): Double {
+        val sum = calculateSum(transactions)
+        return sum / transactions.size
+    }
+
+
+    override fun calculateSum(transactions: List<Transaction>): Double {
+        var sum = 0.0
+        transactions.forEach {
+            sum += it.sourceAmount
         }
-
-
-    override suspend fun calculateSum(transactions: List<Transaction>): Double =
-        withContext(Dispatchers.Default) {
-            var sum = 0.0
-            transactions.forEach {
-                sum += it.sourceAmount
-            }
-
-            sum
-        }
+        return sum
+    }
 }

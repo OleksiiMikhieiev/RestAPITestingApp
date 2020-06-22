@@ -5,7 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import omikhieiev.app.domain.Result
 import omikhieiev.app.domain.boundaries.app.TransactionsUseCase
 import omikhieiev.app.domain.data.Transaction
@@ -31,12 +33,12 @@ class MainScreenViewModel @ViewModelInject constructor(private val transactionsU
         viewModelScope.launch {
             val result = transactionsUseCase.getAllTransactions()
             when (result) {
-                is Result.Success -> {
-                    _getTransactionsResult.postValue(result.data)
-                    val sum = transactionsUseCase.calculateSum(result.data)
-                    val avg = transactionsUseCase.calculateAverage(result.data)
-                    _generalInfo.postValue(GeneralInfo(sum, round(avg)))
-                }
+                is Result.Success -> withContext(Dispatchers.Default) {
+                        val sum = transactionsUseCase.calculateSum(result.data)
+                        val avg = transactionsUseCase.calculateAverage(result.data)
+                        _getTransactionsResult.postValue(result.data)
+                        _generalInfo.postValue(GeneralInfo(sum, round(avg)))
+                    }
                 is Result.Error -> _loadingError.postValue(result.message)
             }
         }

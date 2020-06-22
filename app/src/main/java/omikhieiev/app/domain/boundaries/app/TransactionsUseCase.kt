@@ -7,7 +7,7 @@ interface TransactionsUseCase {
 
     suspend fun getAllTransactions(): Result<List<Transaction>>
 
-    suspend fun calculateAverage(transactions: List<Transaction>): Double
-    suspend fun calculateSum(transactions: List<Transaction>): Double
+    fun calculateAverage(transactions: List<Transaction>): Double
+    fun calculateSum(transactions: List<Transaction>): Double
 
 }
