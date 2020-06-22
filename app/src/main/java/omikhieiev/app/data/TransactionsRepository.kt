@@ -9,6 +9,9 @@ import omikhieiev.app.domain.data.AuthData
 import omikhieiev.app.domain.boundaries.data.TransactionsDataSource
 import omikhieiev.app.domain.data.Transaction
 
+/**
+ * Class that retrieves transactions based on auth token via REST API.
+ */
 class TransactionsRepository(private val restService: RestService): TransactionsDataSource {
 
     override suspend fun getAllTransactions(authData: AuthData): Result<List<Transaction>> =

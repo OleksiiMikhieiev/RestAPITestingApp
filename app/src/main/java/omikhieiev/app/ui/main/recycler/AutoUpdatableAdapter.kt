@@ -1,4 +1,4 @@
-package omikhieiev.app.ui.main
+package omikhieiev.app.ui.main.recycler
 
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView

@@ -1,12 +1,13 @@
 package omikhieiev.app.domain
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import omikhieiev.app.domain.boundaries.app.TransactionsUseCase
 import omikhieiev.app.domain.boundaries.data.TransactionsDataSource
 import omikhieiev.app.domain.data.AuthDataHolder
 import omikhieiev.app.domain.data.Transaction
 
+/**
+ * Implementation for Transaction operations. Uses Boundary interfaces to access data from the Repository.
+ */
 class TransactionsInteractor(private val transactionsDataSource: TransactionsDataSource, private val authDataHolder: AuthDataHolder): TransactionsUseCase {
 
     override suspend fun getAllTransactions(): Result<List<Transaction>> {

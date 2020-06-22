@@ -19,8 +19,6 @@ class TokenDeserializer: JsonDeserializer<LoginResponse> {
         if (json == null)
             throw IllegalArgumentException("Invalid response")
 
-        android.util.Log.d("TST", json.toString())
-
         val token = json.asJsonObject[data].asJsonObject[token].asJsonObject[token].asString
         return LoginResponse(token)
     }

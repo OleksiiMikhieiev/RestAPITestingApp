@@ -10,6 +10,9 @@ import omikhieiev.app.domain.Result
 
 import omikhieiev.app.domain.boundaries.app.LoginUseCase
 
+/**
+ * This class requests login for user credentials and notifies the UI about result.
+ */
 class LoginViewModel @ViewModelInject constructor(private val loginUseCase: LoginUseCase) : ViewModel() {
 
     private val _loginResult: MutableLiveData<LoginResult> = MutableLiveData()

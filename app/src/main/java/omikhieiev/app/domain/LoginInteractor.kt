@@ -4,6 +4,9 @@ import omikhieiev.app.domain.boundaries.app.LoginUseCase
 import omikhieiev.app.domain.boundaries.data.LoginDataSource
 import omikhieiev.app.domain.data.AuthDataHolder
 
+/**
+ * Login flow implementation. Uses repository to retrieve auth token
+ */
 class LoginInteractor(private val loginDataSource: LoginDataSource, private val authDataHolder: AuthDataHolder): LoginUseCase {
 
     override suspend fun login(email: String, password: String): Result<Boolean> {

@@ -22,7 +22,6 @@ class TransactionDeserializer: JsonDeserializer<TransactionResponse> {
         if (json == null)
             throw IllegalArgumentException("Invalid response")
 
-        android.util.Log.d("TST", json.toString())
         val list = json.asJsonObject[data].asJsonObject[transactions].asJsonArray.map {
             val transactionJson = it.asJsonObject
             val reference = transactionJson[reference].asString

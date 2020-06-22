@@ -3,6 +3,9 @@ package omikhieiev.app.domain.boundaries.app
 import omikhieiev.app.domain.Result
 import omikhieiev.app.domain.data.Transaction
 
+/**
+ * General definition for Transactions operations.
+ */
 interface TransactionsUseCase {
 
     suspend fun getAllTransactions(): Result<List<Transaction>>

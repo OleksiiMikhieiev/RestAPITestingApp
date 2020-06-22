@@ -11,8 +11,12 @@ import kotlinx.coroutines.withContext
 import omikhieiev.app.domain.Result
 import omikhieiev.app.domain.boundaries.app.TransactionsUseCase
 import omikhieiev.app.domain.data.Transaction
+import omikhieiev.app.ui.main.model.GeneralInfo
 import kotlin.math.round
 
+/**
+ * This class requests transactions and notifies the UI about updates
+ */
 class MainScreenViewModel @ViewModelInject constructor(private val transactionsUseCase: TransactionsUseCase) : ViewModel() {
 
     private val _getTransactionsResult: MutableLiveData<List<Transaction>> = MutableLiveData()
@@ -37,7 +41,12 @@ class MainScreenViewModel @ViewModelInject constructor(private val transactionsU
                         val sum = transactionsUseCase.calculateSum(result.data)
                         val avg = transactionsUseCase.calculateAverage(result.data)
                         _getTransactionsResult.postValue(result.data)
-                        _generalInfo.postValue(GeneralInfo(sum, round(avg)))
+                        _generalInfo.postValue(
+                            GeneralInfo(
+                                sum,
+                                round(avg)
+                            )
+                        )
                     }
                 is Result.Error -> _loadingError.postValue(result.message)
             }

@@ -12,7 +12,11 @@ import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_main.view.*
 import omikhieiev.app.R
+import omikhieiev.app.ui.main.recycler.TransactionsRecyclerViewAdapter
 
+/**
+ * Transactions list UI representation
+ */
 @AndroidEntryPoint
 class MainFragment : Fragment() {
 
@@ -35,7 +39,8 @@ class MainFragment : Fragment() {
         }
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.notesList)
-        val adapter = TransactionsRecyclerViewAdapter()
+        val adapter =
+            TransactionsRecyclerViewAdapter()
         recyclerView.adapter = adapter
 
         viewModel.transactions.observe(this.viewLifecycleOwner, Observer {

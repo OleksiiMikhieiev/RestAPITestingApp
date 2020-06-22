@@ -9,8 +9,7 @@ import omikhieiev.app.domain.Result
 import omikhieiev.app.domain.data.AuthData
 
 /**
- * Class that requests authentication and user information from the remote data source and
- * maintains an in-memory cache of login status and user credentials information.
+ * Class that requests auth token via REST API.
  */
 class LoginRepository(private val restService: RestService): LoginDataSource {
 

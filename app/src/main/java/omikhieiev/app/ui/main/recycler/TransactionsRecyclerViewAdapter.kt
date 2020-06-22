@@ -1,4 +1,4 @@
-package omikhieiev.app.ui.main
+package omikhieiev.app.ui.main.recycler
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +9,8 @@ import omikhieiev.app.R
 import omikhieiev.app.domain.data.Transaction
 import kotlin.properties.Delegates
 
-class TransactionsRecyclerViewAdapter: RecyclerView.Adapter<TransactionsRecyclerViewAdapter.ViewHolder>(), AutoUpdatableAdapter {
+class TransactionsRecyclerViewAdapter: RecyclerView.Adapter<TransactionsRecyclerViewAdapter.ViewHolder>(),
+    AutoUpdatableAdapter {
 
     var transactions: List<Transaction> by Delegates.observable(emptyList()) {
             _, old, new ->
@@ -19,7 +20,9 @@ class TransactionsRecyclerViewAdapter: RecyclerView.Adapter<TransactionsRecycler
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.transaction_view, parent, false)
-        return ViewHolder(view)
+        return ViewHolder(
+            view
+        )
     }
 
     override fun getItemCount(): Int = transactions.size
